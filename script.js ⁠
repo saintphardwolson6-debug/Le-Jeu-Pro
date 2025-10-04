@@ -1,44 +1,41 @@
 javascript
-// Récupère le prénom de l'utilisateur
-function getUsername() {
-  return localStorage.getItem("username") || "inconnu";
+window.addEventListener("load", () => {
+  const loader = document.getElementById("loader");
+  if (loader) loader.style.display = "none";
+});
+
+const music = document.getElementById("backgroundMusic");
+const muteBtn = document.getElementById("muteBtn");
+
+if (music && muteBtn) {
+  muteBtn.addEventListener("click", () => {
+    music.muted =!music.muted;
+    muteBtn.textContent = music.muted? "🔈 Activer le son": "🔊 Couper le son";
+});
 }
 
-// Sauvegarde les réponses de l'hôte
-function saveAnswers(answers) {
-  localStorage.setItem("userAnswers", JSON.stringify(answers));
+const menuContainer = document.getElementById("menu");
+if (menuContainer) {
+  fetch("menu.html")
+.then(res => res.text())
+.then(data => {
+      menuContainer.innerHTML = data;
+      const music = document.getElementById("backgroundMusic");
+const muteBtn = document.getElementById("muteBtn");
+      if (music && muteBtn) {
+        muteBtn.addEventListener("click", () => {
+          music.muted =!music.muted;
+          muteBtn.textContent = music.muted? "🔈 Activer le son": "🔊 Couper le son";
+});
+}
+});
 }
 
-// Récupère les réponses de l'hôte
-function getAnswers() {
-  return JSON.parse(localStorage.getItem("userAnswers") || "{}");
+const footerContainer = document.getElementById("footer");
+if (footerContainer) {
+  fetch("footer.html")
+.then(res => res.text())
+.then(data => {
+      footerContainer.innerHTML = data;
+});
 }
-
-// Crée le lien personnalisé à partager
-function generateShareLink() {
-  const username = getUsername();
-  const link = `${window.location.origin}/jouer.html?user=${encodeURIComponent(username)}`;
-  localStorage.setItem("shareLink", link);
-  return link;
-}
-
-// Sauvegarde le score d'un joueur
-function saveScore(playerName, score) {
-  const scoreboard = JSON.parse(localStorage.getItem("scoreboard") || "[]");
-  scoreboard.push({ name: playerName, score: score});
-  localStorage.setItem("scoreboard", JSON.stringify(scoreboard));
-}
-
-// Trie et retourne le classement
-function getSortedScoreboard() {
-  const scoreboard = JSON.parse(localStorage.getItem("scoreboard") || "[]");
-  return scoreboard.sort((a, b) => b.score - a.score);
-}
-
-// Réinitialise le jeu pour un nouveau joueur
-function resetGame() {
-  localStorage.removeItem("userAnswers");
-  localStorage.removeItem("shareLink");
-  localStorage.removeItem("scoreboard");
-}
- ⁠
