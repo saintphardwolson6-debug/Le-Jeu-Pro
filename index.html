@@ -1,42 +1,34 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Le Jeu Pro</title>
-  <link rel="stylesheet" href="style.css">
-
-  <!-- Icônes fontawesome pou share -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <!-- Son ak animasyon -->
-  <script>
-    function playSound() {
-      const audio = new Audio("assets/click.mp3");
-      audio.play();
-    }
-  </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Jeu Pro</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/script.js" defer></script>
 </head>
 <body>
-  <header>
-    <img src="assets/logo.png" alt="Logo Le Jeu Pro" class="logo animate-logo">
-    <h1>Bienvenue dans <span>Le Jeu Pro</span></h1>
-  </header>
+<header>
+  <img src="assets/logo.png" class="logo pulse" alt="Logo">
+  <h1>Bienvenue sur Le Jeu Pro 🎮</h1>
+</header>
 
-  <main>
-    <a href="./questions.html" class="btn pulse" onclick="playSound()">🎮 Créer mon défi</a>
-    <a href="./jouer.html" class="btn pulse" onclick="playSound()">▶️ Jouer un défi</a>
-    <a href="./score.html" class="btn pulse">🏆 Classement</a>
-  </main>
+<main>
+  <p>Testez combien vos amis vous connaissent !</p>
+  <a href="questions.html" class="btn pulse">🎮 Créer mon défi</a>
+  <a href="jouer.html" class="btn pulse">▶️ Jouer un défi</a>
+</main>
 
-  <!-- Boutons partage -->
-  <footer>
-    <p>Partager avec vos amis :</p>
-    <div class="social-share">
-      <a href="https://wa.me/?text=Viens%20jouer%20au%20Jeu%20Pro%20👉%20https://tonlien.github.io/jeu-pro" target="_blank"><i class="fab fa-whatsapp"></i></a>
-      <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonlien.github.io/jeu-pro" target="_blank"><i class="fab fa-facebook"></i></a>
-      <a href="https://twitter.com/intent/tweet?url=https://tonlien.github.io/jeu-pro&text=Viens%20jouer%20au%20Jeu%20Pro%20!" target="_blank"><i class="fab fa-twitter"></i></a>
-    </div>
-  </footer>
+<footer>
+  <p>Partager :</p>
+  <div class="social-share">
+    <a id="shareWA" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <a id="shareFB" target="_blank"><i class="fab fa-facebook"></i></a>
+    <a id="shareTW" target="_blank"><i class="fab fa-twitter"></i></a>
+  </div>
+</footer>
+
+<audio id="music" src="assets/action.mp3" autoplay loop></audio>
+<button id="muteBtn">🔊 Couper le son</button>
 </body>
 </html>
