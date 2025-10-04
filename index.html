@@ -1,37 +1,60 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Le Jeu Pro — Accueil</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Le Jeu Pro - Accueil</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="images/logo-jeu-pro.png" type="image/png">
+  <script src="js/script.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div id="menu-placeholder"></div>
 
-  <main class="container center">
-    <img src="assets/images/logo-jeu-pro.png" alt="Le Jeu Pro" class="logo pulse">
-    <h1>Le Jeu Pro</h1>
-    <p class="lead">Crée ton défi — partage-le — tes amis devinent & s'affrontent !</p>
+  <header>
+    <img src="images/logo-jeu-pro.png" alt="Logo Le Jeu Pro" width="150">
+    <h1>Bienvenue sur <span class="pulse">Le Jeu Pro 🎮</span></h1>
+  </header>
 
-    <div class="home-actions">
-      <a class="btn" href="questions.html">Créer mon défi (Hôte)</a>
-      <a class="btn ghost" href="jouer.html">Jouer (Entrer un lien)</a>
-      <a class="btn" href="score.html">Classements globaux</a>
-    </div>
-
-    <section class="card quick">
-      <h3>Règles rapides</h3>
-      <ul>
-        <li>Max 10 questions par hôte.</li>
-        <li>Chaque bonne réponse = <strong>1 point</strong> (max 10).</li>
-        <li>L'hôte peut consulter la liste des participants et leurs scores.</li>
-      </ul>
+  <main>
+    <section class="intro">
+      <h2>Comment ça marche ?</h2>
+      <ol>
+        <li>👉 Entrez votre nom</li>
+        <li>👉 Répondez à 10 questions sur vous</li>
+        <li>👉 Partagez le lien avec vos amis</li>
+      </ol>
+      <p>Vos amis essaient de deviner vos réponses et gagnent des points 🔥</p>
     </section>
+
+    <section class="actions">
+      <a href="./questions.html" class="btn pulse">🎮 Créer mon défi</a>
+    </section>
+
+    <section class="share">
+      <h3>Partager le jeu</h3>
+      <a href="https://wa.me/?text=Viens%20jouer%20avec%20moi%20sur%20Le%20Jeu%20Pro%20👉%20https://votre-lien-github.io/Le-Jeu-Pro/"
+         target="_blank">
+        <img src="https://img.icons8.com/color/48/whatsapp.png" alt="WhatsApp">
+      </a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https://votre-lien-github.io/Le-Jeu-Pro/"
+         target="_blank">
+        <img src="https://img.icons8.com/color/48/facebook.png" alt="Facebook">
+      </a>
+      <a href="https://twitter.com/intent/tweet?url=https://votre-lien-github.io/Le-Jeu-Pro/&text=Viens%20jouer%20avec%20moi%20sur%20Le%20Jeu%20Pro%20🔥"
+         target="_blank">
+        <img src="https://img.icons8.com/color/48/twitter.png" alt="Twitter">
+      </a>
+    </section>
+
   </main>
 
-  <div id="footer-placeholder"></div>
-  <script src="js/script.js"></script>
+  <footer>
+    <p>&copy; 2025 Le Jeu Pro | <a href="./apropos.html">À propos</a> | <a href="./mentions-legales.html">Mentions légales</a></p>
+  </footer>
+
+  <!-- Musique de fond -->
+  <audio id="backgroundMusic" src="sounds/action-187118.mp3" autoplay loop></audio>
+  <button id="muteBtn">🔊 Couper le son</button>
+
 </body>
 </html>
