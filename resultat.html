@@ -1,0 +1,35 @@
+html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ton lien de défi – Le Jeu Pro</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>🎉 Ton défi est prêt!</h2>
+    <p>Voici ton lien personnalisé. Envoie-le à tes amis pour voir qui te connaît le mieux:</p>
+
+    <input type="text" id="shareLink" readonly />
+    <button onclick="copyLink()">📋 Copier le lien</button>
+
+    <p style="margin-top: 20px;">✅ Une fois qu’ils auront joué, tu pourras voir leur score et le classement.</p>
+    <button onclick="window.location.href='score.html'">Voir le classement</button>
+  </div>
+
+  <script>
+    const link = localStorage.getItem("shareLink");
+    document.getElementById("shareLink").value = link || "Lien non disponible";
+
+    function copyLink() {
+      const input = document.getElementById("shareLink");
+      input.select();
+      input.setSelectionRange(0, 99999); // Pour mobile
+      document.execCommand("copy");
+      alert("Lien copié dans le presse-papiers!");
+}
+  </script>
+</body>
+</html>
+ ⁠
