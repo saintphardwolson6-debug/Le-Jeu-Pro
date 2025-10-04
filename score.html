@@ -1,45 +1,57 @@
-⁠ html
+ html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <title>Classement – Le Jeu Pro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Meni navigasyon -->
+  <div id="menu"></div>
+
+  <!-- Kontni prensipal -->
   <div class="container">
-    <h2>🏆 Classement des amis</h2>
-    <p>Voici qui connaît le mieux <span id="hostName"></span>:</p>
+    <h2>🏆 Classement des joueurs</h2>
+    <p>Voici le score de tous ceux qui ont tenté de deviner tes réponses:</p>
 
     <table>
       <thead>
         <tr>
-          <th>Nom</th>
+          <th>Nom du joueur</th>
           <th>Score</th>
         </tr>
       </thead>
-      <tbody id="scoreboardBody"></tbody>
+      <tbody id="scoreboardBody">
+        <!-- Rezilta yo ap parèt la -->
+      </tbody>
     </table>
 
-    <button onclick="window.location.href='rejouer.html'">🔁 Créer ton propre défi</button>
+    <button onclick="window.location.href='rejouer.html'">🔄 Créer un nouveau défi</button>
   </div>
 
+  <!-- Footer -->
+  <div id="footer"></div>
+
+  <!-- Script pou chaje meni/footer + afiche klasman -->
   <script>
-    // Récupère le nom de l'hôte
-    const host = localStorage.getItem("username") || "ton ami";
-    document.getElementById("hostName").textContent = host;
+    // Chaje meni ak footer
+    fetch("menu.html").then(res => res.text()).then(data => {
+      document.getElementById("menu").innerHTML = data;
+});
+    fetch("footer.html").then(res => res.text()).then(data => {
+      document.getElementById("footer").innerHTML = data;
+});
 
-    // Récupère le classement
+    // Récupère klasman
     const scoreboard = JSON.parse(localStorage.getItem("scoreboard") || "[]");
+    const sorted = scoreboard.sort((a, b) => b.score - a.score);
 
-    // Trie par score décroissant
-    scoreboard.sort((a, b) => b.score - a.score);
-
-    // Affiche dans le tableau
     const tbody = document.getElementById("scoreboardBody");
-    scoreboard.forEach(entry => {
+    sorted.forEach(player => {
       const row = document.createElement("tr");
-      row.innerHTML = `<td>${entry.name}</td><td>${entry.score}/10</td>`;
+      row.innerHTML = `<td>${player.name}</td><td>${player.score}/10</td>`;
       tbody.appendChild(row);
 });
   </script>
