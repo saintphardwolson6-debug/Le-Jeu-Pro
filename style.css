@@ -1,74 +1,32 @@
 css
-/* 🌐 Reset global */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to right, #f0f4ff, #e0f7fa);
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-image: url('../images/background-design.jpeg');
+  background-size: cover;
+  background-position: center;
   color: #333;
-  line-height: 1.6;
-  padding-bottom: 100px;
 }
 
-/* 📦 Container */
-.container {
-  max-width: 800px;
-  margin: auto;
-  padding: 20px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.1);
-  animation: fadeIn 1.5s ease;
-}
-
-/* 🖼️ Imaj */
-img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-/* 🎞️ Animasyon */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px);}
-  to   { opacity: 1; transform: translateY(0);}
-}
-
-@keyframes pulse {
-  0%   { transform: scale(1);}
-  50%  { transform: scale(1.05);}
-  100% { transform: scale(1);}
-}
-
-h2, h1 {
-  text-align: center;
-  margin-bottom: 20px;
-  animation: pulse 2s infinite;
-}
-
-/* 🖱️ Bouton */
-button {
+.menu,.site-footer {
   background-color: #00bfa5;
   color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  padding: 10px;
+  text-align: center;
 }
 
-button:hover {
-  transform: scale(1.05);
-  background-color: #008e76;
+.menu ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
 }
 
-/* 🔇 Bouton mute */
+.menu a,.site-footer a {
+  color: white;
+  text-decoration: none;
+}
+
 #muteBtn {
   background-color: #f5f5f5;
   border: 1px solid #ccc;
@@ -76,111 +34,49 @@ button:hover {
   border-radius: 6px;
   cursor: pointer;
   font-size: 14px;
-  margin-top: 10px;
-}
-#muteBtn:hover {
-  background-color: #e0e0e0;
 }
 
-/* 📋 Formulaires */
-input[type="text"], input[type="email"] {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 2px solid #ccc;
-  border-radius: 6px;
-  transition: border-color 0.3s ease;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px);}
+  to { opacity: 1; transform: translateY(0);}
 }
 
-input[type="text"]:focus, input[type="email"]:focus {
-  border-color: #00bfa5;
-  outline: none;
+@keyframes pulse {
+  0% { transform: scale(1);}
+  50% { transform: scale(1.05);}
+  100% { transform: scale(1);}
 }
 
-/* 📊 Tableau klasman */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
+@keyframes slideIn {
+  from { transform: translateX(-100px); opacity: 0;}
+  to { transform: translateX(0); opacity: 1;}
 }
 
-th, td {
-  padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
+.fade-in { animation: fadeIn 1.5s ease;}
+.pulse { animation: pulse 2s infinite;}
+.slide-in { animation: slideIn 1s ease;}
 
-th {
-  background-color: #00bfa5;
-  color: white;
-}
-
-/* 📱 Responsive */
-@media (max-width: 600px) {
-.container {
-    padding: 10px;
-}
-
-  button {
-    width: 100%;
-}
-
-.menu ul {
-    flex-direction: column;
-    align-items: center;
-}
-
-.menu li {
-    margin: 10px 0;
-}
-}
-
-/* 🔗 Lyen */
-a {
-  color: #00bfa5;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* 🧭 Meni */
-.menu ul {
+.loader-container {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: white;
   display: flex;
   justify-content: center;
-  list-style: none;
-  background-color: #00bfa5;
-  padding: 10px;
-  border-radius: 0 0 12px 12px;
+  align-items: center;
+  z-index: 9999;
 }
 
-.menu li {
-  margin: 0 15px;
+.loader {
+  width: 50px;
+  height: 50px;
+  border: 6px solid #00bfa5;
+  border-top: 6px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
 }
 
-.menu a {
-  color: white;
-  font-weight: bold;
+@keyframes spin {
+  to { transform: rotate(360deg);}
 }
-
-/* 🦶 Footer */
-.footer {
-  text-align: center;
-  padding: 20px;
-  background-color: #f1f1f1;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  font-size: 14px;
-}
-
-/* 🎧 Imaj ikon son */
-.audio-icon {
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  background: url('images/speaker.png') no-repeat center center;
-  background-size: contain;
-  cursor: pointer;
-}
+ ⁠
