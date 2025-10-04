@@ -1,10 +1,9 @@
- html
-<!-- footer.html -->
+html
 <footer class="site-footer">
   <p>&copy; 2025 Le Jeu Pro. Tout dwa rezève.</p>
   <p>
     <a href="mentions-legales.html">Mentions légales</a> |
-    <a href="contact.html">Contact</a> |
-    <a href="apropos.html">À propos</a>
+    <a href="contact.html">Contact</a>
   </p>
 </footer>
+ ⁠
