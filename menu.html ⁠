@@ -1,0 +1,11 @@
+ html
+<nav>
+  <ul class="nav-menu">
+    <li><a href="index.html">🏠 Accueil</a></li>
+    <li><a href="questions.html">🧩 Créer un défi</a></li>
+    <li><a href="jouer.html">🎯 Jouer</a></li>
+    <li><a href="score.html">🏆 Classement</a></li>
+    <li><a href="apropos.html">📘 À propos</a></li>
+  </ul>
+</nav>
+ ⁠
