@@ -1,0 +1,48 @@
+
+⁠ html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Classement – Le Jeu Pro</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>🏆 Classement des amis</h2>
+    <p>Voici qui connaît le mieux <span id="hostName"></span>:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody id="scoreboardBody"></tbody>
+    </table>
+
+    <button onclick="window.location.href='rejouer.html'">🔁 Créer ton propre défi</button>
+  </div>
+
+  <script>
+    // Récupère le nom de l'hôte
+    const host = localStorage.getItem("username") || "ton ami";
+    document.getElementById("hostName").textContent = host;
+
+    // Récupère le classement
+    const scoreboard = JSON.parse(localStorage.getItem("scoreboard") || "[]");
+
+    // Trie par score décroissant
+    scoreboard.sort((a, b) => b.score - a.score);
+
+    // Affiche dans le tableau
+    const tbody = document.getElementById("scoreboardBody");
+    scoreboard.forEach(entry => {
+      const row = document.createElement("tr");
+      row.innerHTML = `<td>${entry.name}</td><td>${entry.score}/10</td>`;
+      tbody.appendChild(row);
+});
+  </script>
+</body>
+</html>
