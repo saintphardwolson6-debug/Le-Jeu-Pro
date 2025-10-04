@@ -1,24 +1,37 @@
-html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Accueil - Le Jeu Pro</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Le Jeu Pro — Accueil</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div id="loader" class="loader-container"><div class="loader"></div></div>
-  <div id="menu"></div>
+  <div id="menu-placeholder"></div>
 
-  <main>
-    <h1 class="pulse">Bienvenue sur Le Jeu Pro</h1>
-    <p class="fade-in">Crée ton propre défi et découvre qui te connaît vraiment!</p>
-    <a href="jouer.html" class="slide-in">C’est ton tour!</a>
-    <a href="apropos.html" class="slide-in">À propos du jeu</a>
+  <main class="container center">
+    <img src="assets/images/logo-jeu-pro.png" alt="Le Jeu Pro" class="logo pulse">
+    <h1>Le Jeu Pro</h1>
+    <p class="lead">Crée ton défi — partage-le — tes amis devinent & s'affrontent !</p>
+
+    <div class="home-actions">
+      <a class="btn" href="questions.html">Créer mon défi (Hôte)</a>
+      <a class="btn ghost" href="jouer.html">Jouer (Entrer un lien)</a>
+      <a class="btn" href="score.html">Classements globaux</a>
+    </div>
+
+    <section class="card quick">
+      <h3>Règles rapides</h3>
+      <ul>
+        <li>Max 10 questions par hôte.</li>
+        <li>Chaque bonne réponse = <strong>1 point</strong> (max 10).</li>
+        <li>L'hôte peut consulter la liste des participants et leurs scores.</li>
+      </ul>
+    </section>
   </main>
 
-  <div id="footer"></div>
+  <div id="footer-placeholder"></div>
   <script src="js/script.js"></script>
 </body>
 </html>
- ⁠
