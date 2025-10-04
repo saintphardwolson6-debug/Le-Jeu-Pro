@@ -4,32 +4,52 @@ html
 <head>
   <meta charset="UTF-8" />
   <title>Ton lien de défi – Le Jeu Pro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Meni navigasyon -->
+  <div id="menu"></div>
+
+  <!-- Kontni prensipal -->
   <div class="container">
-    <h2>🎉 Ton défi est prêt!</h2>
+    <h2>🔗 Ton lien est prêt!</h2>
     <p>Voici ton lien personnalisé. Envoie-le à tes amis pour voir qui te connaît le mieux:</p>
 
     <input type="text" id="shareLink" readonly />
     <button onclick="copyLink()">📋 Copier le lien</button>
 
-    <p style="margin-top: 20px;">✅ Une fois qu’ils auront joué, tu pourras voir leur score et le classement.</p>
-    <button onclick="window.location.href='score.html'">Voir le classement</button>
+    <p style="margin-top: 20px;">Quand tes amis auront joué, tu pourras voir leur score ici:</p>
+    <button onclick="window.location.href='score.html'">🏆 Voir le classement</button>
   </div>
 
-  <script>
-    const link = localStorage.getItem("shareLink");
-    document.getElementById("shareLink").value = link || "Lien non disponible";
+  <!-- Footer -->
+  <div id="footer"></div>
 
+  <!-- Script pou chaje meni/footer + lyen pataje -->
+  <script>
+    // Chaje meni ak footer
+    fetch("menu.html").then(res => res.text()).then(data => {
+      document.getElementById("menu").innerHTML = data;
+});
+    fetch("footer.html").then(res => res.text()).then(data => {
+      document.getElementById("footer").innerHTML = data;
+});
+
+    // Kreye lyen pataje
+    const username = localStorage.getItem("username") || "ton-ami";
+    const link = `${window.location.origin}/jouer.html?user=${encodeURIComponent(username)}`;
+    document.getElementById("shareLink").value = link;
+    localStorage.setItem("shareLink", link);
+
+    // Fonksyon pou kopi lyen
     function copyLink() {
       const input = document.getElementById("shareLink");
       input.select();
-      input.setSelectionRange(0, 99999); // Pour mobile
+      input.setSelectionRange(0, 99999); // pou mobil
       document.execCommand("copy");
       alert("Lien copié dans le presse-papiers!");
 }
   </script>
 </body>
 </html>
- ⁠
