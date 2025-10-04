@@ -1,0 +1,54 @@
+
+⁠ html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Crée ton défi – Le Jeu Pro</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>👋 Bonjour <span id="hostName"></span>!</h2>
+    <p>Réponds à ces 10 questions pour créer ton défi personnalisé.</p>
+
+    <form id="questionForm">
+      <input type="text" name="q1" placeholder="Ton plat préféré?" required />
+      <input type="text" name="q2" placeholder="Ta couleur préférée?" required />
+      <input type="text" name="q3" placeholder="Ton animal préféré?" required />
+      <input type="text" name="q4" placeholder="Ton film préféré?" required />
+      <input type="text" name="q5" placeholder="Ton sport préféré?" required />
+      <input type="text" name="q6" placeholder="Ton artiste ou groupe préféré?" required />
+      <input type="text" name="q7" placeholder="Ton pays de rêve?" required />
+      <input type="text" name="q8" placeholder="Ton dessert préféré?" required />
+      <input type="text" name="q9" placeholder="Ton passe-temps favori?" required />
+      <input type="text" name="q10" placeholder="Ton plus grand rêve?" required />
+      <button type="submit">✅ Créer mon défi</button>
+    </form>
+  </div>
+
+  <script>
+    // Affiche le nom de l'hôte
+    document.getElementById("hostName").textContent = localStorage.getItem("username") || "toi";
+
+    // Sauvegarde les réponses
+    document.getElementById("questionForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const answers = {};
+      formData.forEach((value, key) => {
+        answers[key] = value.trim();
+});
+      localStorage.setItem("userAnswers", JSON.stringify(answers));
+
+      // Crée le lien personnalisé
+      const username = localStorage.getItem("username");
+      const shareLink = `${window.location.origin}/jouer.html?user=${encodeURIComponent(username)}`;
+      localStorage.setItem("shareLink", shareLink);
+
+      // Redirection vers la page de partage
+      window.location.href = "resultat.html";
+});
+  </script>
+</body>
+</html>
