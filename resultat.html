@@ -1,39 +1,33 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Résultat - Le Jeu Pro</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Résultat - Le Jeu Pro</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/script.js" defer></script>
 </head>
 <body>
-  <header>
-    <h1>🎉 Bravo !</h1>
-  </header>
+<header>
+  <img src="assets/logo.png" class="logo pulse" alt="Logo">
+  <h1>🎉 Résultat</h1>
+</header>
 
-  <main>
-    <p>Ton score est : <strong id="scoreFinal">0</strong></p>
-    <p>Ton lien de défi (UID) :</p>
-    <input type="text" id="uidLink" value="https://tonlien.github.io/jeu-pro/?uid=ABC123" readonly>
-    
-    <button onclick="copyLink()">📋 Copier mon lien</button>
+<main>
+<p>Ton score : <span id="scoreFinal">0</span>/10</p>
 
-    <h3>Partager ton défi :</h3>
-    <div class="social-share">
-      <a href="https://wa.me/?text=Voici%20mon%20défi%20👉%20https://tonlien.github.io/jeu-pro/?uid=ABC123" target="_blank"><i class="fab fa-whatsapp"></i></a>
-      <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonlien.github.io/jeu-pro/?uid=ABC123" target="_blank"><i class="fab fa-facebook"></i></a>
-      <a href="https://twitter.com/intent/tweet?url=https://tonlien.github.io/jeu-pro/?uid=ABC123&text=Voici%20mon%20défi%20!" target="_blank"><i class="fab fa-twitter"></i></a>
-    </div>
-  </main>
+<p>Lien UID :</p>
+<input type="text" id="uidLink" readonly value="https://tonlien.github.io/Le-Jeu-Pro/?uid=ABC123">
+<button onclick="copyLink()">📋 Copier</button>
 
-  <script>
-    function copyLink() {
-      const input = document.getElementById("uidLink");
-      input.select();
-      document.execCommand("copy");
-      alert("Lien copié ✅ Partage-le à tes amis !");
-    }
-  </script>
+<h3>Partager ton défi :</h3>
+<div class="social-share">
+  <a href="#" id="shareWA" target="_blank">WhatsApp</a>
+  <a href="#" id="shareFB" target="_blank">Facebook</a>
+  <a href="#" id="shareTW" target="_blank">Twitter</a>
+</div>
+
+<a href="./rejouer.html" class="btn pulse">Rejouer</a>
+</main>
 </body>
 </html>
