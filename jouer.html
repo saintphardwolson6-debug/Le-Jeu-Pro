@@ -1,0 +1,64 @@
+html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Jouer au défi – Le Jeu Pro</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>🎯 Connais-tu bien <span id="hostName"></span>?</h2>
+    <p>Entre ton prénom et essaie de deviner ses réponses:</p>
+
+    <form id="playForm">
+      <input type="text" id="playerName" placeholder="Ton prénom" required />
+
+      <input type="text" name="q1" placeholder="Son plat préféré?" required />
+      <input type="text" name="q2" placeholder="Sa couleur préférée?" required />
+      <input type="text" name="q3" placeholder="Son animal préféré?" required />
+      <input type="text" name="q4" placeholder="Son film préféré?" required />
+      <input type="text" name="q5" placeholder="Son sport préféré?" required />
+      <input type="text" name="q6" placeholder="Son artiste ou groupe préféré?" required />
+      <input type="text" name="q7" placeholder="Son pays de rêve?" required />
+      <input type="text" name="q8" placeholder="Son dessert préféré?" required />
+      <input type="text" name="q9" placeholder="Son passe-temps favori?" required />
+      <input type="text" name="q10" placeholder="Son plus grand rêve?" required />
+
+      <button type="submit">📊 Voir mon score</button>
+    </form>
+  </div>
+
+  <script>
+    // Récupère le nom de l'hôte depuis l'URL
+    const params = new URLSearchParams(window.location.search);
+    const host = params.get("user") || "ton ami";
+    document.getElementById("hostName").textContent = host;
+
+    // Récupère les vraies réponses
+    const correctAnswers = JSON.parse(localStorage.getItem("userAnswers") || "{}");
+
+    document.getElementById("playForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const playerName = document.getElementById("playerName").value.trim();
+      let score = 0;
+
+      formData.forEach((value, key) => {
+        const guess = value.trim().toLowerCase();
+        const correct = (correctAnswers[key] || "").trim().toLowerCase();
+        if (guess === correct) score++;
+});
+
+      // Sauvegarde score et nom du joueur
+      const scoreboard = JSON.parse(localStorage.getItem("scoreboard") || "[]");
+      scoreboard.push({ name: playerName, score: score});
+      localStorage.setItem("scoreboard", JSON.stringify(scoreboard));
+
+      // Redirection vers la page de score
+      window.location.href = "score.html";
+});
+  </script>
+</body>
+</html>
+ ⁠
