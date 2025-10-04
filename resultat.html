@@ -1,35 +1,39 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
-<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Résultat — Le Jeu Pro</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Résultat - Le Jeu Pro</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <div id="menu-placeholder"></div>
-  <main class="container center">
-    <div class="card">
-      <h2>Résultat</h2>
-      <p id="resText" class="lead">Calcul du score...</p>
-      <div style="margin-top:12px">
-        <a id="backHome" class="btn" href="index.html">Accueil</a>
-        <a id="seeRank" class="btn ghost" href="#">Voir classement du défi</a>
-        <a class="btn" href="questions.html">Créer un défi</a>
-      </div>
+  <header>
+    <h1>🎉 Bravo !</h1>
+  </header>
+
+  <main>
+    <p>Ton score est : <strong id="scoreFinal">0</strong></p>
+    <p>Ton lien de défi (UID) :</p>
+    <input type="text" id="uidLink" value="https://tonlien.github.io/jeu-pro/?uid=ABC123" readonly>
+    
+    <button onclick="copyLink()">📋 Copier mon lien</button>
+
+    <h3>Partager ton défi :</h3>
+    <div class="social-share">
+      <a href="https://wa.me/?text=Voici%20mon%20défi%20👉%20https://tonlien.github.io/jeu-pro/?uid=ABC123" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https://tonlien.github.io/jeu-pro/?uid=ABC123" target="_blank"><i class="fab fa-facebook"></i></a>
+      <a href="https://twitter.com/intent/tweet?url=https://tonlien.github.io/jeu-pro/?uid=ABC123&text=Voici%20mon%20défi%20!" target="_blank"><i class="fab fa-twitter"></i></a>
     </div>
   </main>
-  <div id="footer-placeholder"></div>
-  <script src="js/script.js"></script>
+
   <script>
-  function pageInitResult(){
-    const params = new URLSearchParams(location.search);
-    const uid = params.get('uid');
-    const name = params.get('name');
-    const score = params.get('score');
-    const resText = document.getElementById('resText');
-    resText.innerHTML = `${name} — Vous avez obtenu <strong>${score}</strong> / 10 points 🎉`;
-    if(uid) document.getElementById('seeRank').href = `score.html?uid=${uid}`;
-    else document.getElementById('seeRank').classList.add('hidden');
-  }
+    function copyLink() {
+      const input = document.getElementById("uidLink");
+      input.select();
+      document.execCommand("copy");
+      alert("Lien copié ✅ Partage-le à tes amis !");
+    }
   </script>
 </body>
 </html>
