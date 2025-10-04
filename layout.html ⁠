@@ -1,0 +1,30 @@
+html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Le Jeu Pro</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Inclure menu -->
+  <div id="menu"></div>
+
+  <div class="container">
+    <!-- Contenu paj la -->
+  </div>
+
+  <!-- Inclure footer -->
+  <div id="footer"></div>
+
+  <script>
+    fetch("menu.html").then(res => res.text()).then(data => {
+      document.getElementById("menu").innerHTML = data;
+});
+    fetch("footer.html").then(res => res.text()).then(data => {
+      document.getElementById("footer").innerHTML = data;
+});
+  </script>
+</body>
+</html>
+ ⁠
