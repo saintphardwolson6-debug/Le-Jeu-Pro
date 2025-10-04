@@ -3,33 +3,45 @@ html
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <title>Créer ton propre défi – Le Jeu Pro</title>
+  <title>Rejouer – Le Jeu Pro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Meni navigasyon -->
+  <div id="menu"></div>
+
+  <!-- Kontni prensipal -->
   <div class="container">
-    <h2>🔁 À ton tour de briller!</h2>
-    <p>Tu veux savoir qui te connaît vraiment? Crée ton propre défi maintenant:</p>
+    <h2>🔄 Rejouer au défi</h2>
+    <p>Tu veux créer un nouveau défi avec des réponses différentes? Clique ci-dessous pour recommencer:</p>
 
-    <input type="text" id="newUsername" placeholder="Ton prénom ou pseudo" />
-    <button onclick="startNewGame()">🚀 Créer mon défi</button>
-
-    <p style="margin-top: 30px;">Tu seras redirigé vers les 10 questions pour personnaliser ton défi.</p>
+    <button onclick="resetGame()">🧹 Réinitialiser et recommencer</button>
+    <p style="margin-top: 20px;">Ou retourne à l’accueil: <a href="index.html">🏠 Accueil</a></p>
   </div>
 
+  <!-- Footer -->
+  <div id="footer"></div>
+
+  <!-- Script pou chaje meni/footer + reset -->
   <script>
-    function startNewGame() {
-      const name = document.getElementById("newUsername").value.trim();
-      if (!name) {
-        alert("Merci d’entrer ton prénom!");
-        return;
-}
-      localStorage.setItem("username", name);
+    // Chaje meni ak footer
+    fetch("menu.html").then(res => res.text()).then(data => {
+      document.getElementById("menu").innerHTML = data;
+});
+    fetch("footer.html").then(res => res.text()).then(data => {
+      document.getElementById("footer").innerHTML = data;
+});
+
+    // Fonksyon pou reset tout done
+    function resetGame() {
+      localStorage.removeItem("username");
       localStorage.removeItem("userAnswers");
-      localStorage.removeItem("shareLink");
       localStorage.removeItem("scoreboard");
+      localStorage.removeItem("shareLink");
       window.location.href = "questions.html";
 }
   </script>
 </body>
 </html>
+ ⁠
