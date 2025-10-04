@@ -1,41 +1,33 @@
-javascript
-window.addEventListener("load", () => {
-  const loader = document.getElementById("loader");
-  if (loader) loader.style.display = "none";
+// js/script.js
+document.addEventListener('DOMContentLoaded', ()=>{
+  loadFragment('menu.html','menu-placeholder');
+  loadFragment('footer.html','footer-placeholder', ()=>{
+    const el = document.getElementById('year'); if(el) el.textContent = new Date().getFullYear();
+  });
+
+  // sounds
+  window.sounds = {
+    click: new Audio('assets/sounds/click.mp3'),
+    correct: new Audio('assets/sounds/correct.mp3'),
+    wrong: new Audio('assets/sounds/wrong.mp3'),
+    bg: new Audio('assets/sounds/action-187118.mp3')
+  };
+  if(window.sounds.bg){ window.sounds.bg.loop = true; window.sounds.bg.volume = 0.12; }
+
+  window.playS = (k) => { try{ if(window.sounds[k]){ window.sounds[k].currentTime = 0; window.sounds[k].play(); } } catch(e){} };
+
+  // call page-specific init if found (functions defined inline in pages)
+  try { if(typeof pageInitHost === 'function' && location.pathname.endsWith('questions.html')) pageInitHost(); } catch(e){}
+  try { if(typeof pageInitPlay === 'function' && location.pathname.endsWith('jouer.html')) pageInitPlay(); } catch(e){}
+  try { if(typeof pageInitResult === 'function' && location.pathname.endsWith('resultat.html')) pageInitResult(); } catch(e){}
+  try { if(typeof pageInitScore === 'function' && location.pathname.endsWith('score.html')) pageInitScore(); } catch(e){}
 });
 
-const music = document.getElementById("backgroundMusic");
-const muteBtn = document.getElementById("muteBtn");
-
-if (music && muteBtn) {
-  muteBtn.addEventListener("click", () => {
-    music.muted =!music.muted;
-    muteBtn.textContent = music.muted? "🔈 Activer le son": "🔊 Couper le son";
-});
-}
-
-const menuContainer = document.getElementById("menu");
-if (menuContainer) {
-  fetch("menu.html")
-.then(res => res.text())
-.then(data => {
-      menuContainer.innerHTML = data;
-      const music = document.getElementById("backgroundMusic");
-const muteBtn = document.getElementById("muteBtn");
-      if (music && muteBtn) {
-        muteBtn.addEventListener("click", () => {
-          music.muted =!music.muted;
-          muteBtn.textContent = music.muted? "🔈 Activer le son": "🔊 Couper le son";
-});
-}
-});
-}
-
-const footerContainer = document.getElementById("footer");
-if (footerContainer) {
-  fetch("footer.html")
-.then(res => res.text())
-.then(data => {
-      footerContainer.innerHTML = data;
-});
+// load html fragments for menu/footer
+function loadFragment(url, placeholderId, cb){
+  fetch(url).then(r=>r.text()).then(html=>{
+    const c = document.getElementById(placeholderId);
+    if(c) c.innerHTML = html;
+    cb && cb();
+  }).catch(e=>console.warn('Fragment load failed', url, e));
 }
