@@ -1,0 +1,18 @@
+html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mentions légales – Le Jeu Pro</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>📄 Mentions légales</h2>
+    <p>Ce site est un projet personnel à but ludique. Aucune donnée personnelle n’est collectée ni stockée sur un serveur.</p>
+    <p>Les réponses sont enregistrées uniquement dans le navigateur de l’utilisateur (localStorage).</p>
+    <p>Responsable du site: TonNom</p>
+    <p>Contact: <a href="mailto:saintphard.wolson6@gmail.com">saintphard.wolson6@gmail.com</a></p>
+  </div>
+</body>
+</html>
