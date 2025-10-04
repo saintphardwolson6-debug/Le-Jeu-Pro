@@ -4,57 +4,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jouer - Le Jeu Pro</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/script.js" defer></script>
 </head>
 <body>
 <header>
-  <img src="assets/logo.png" alt="Logo" class="logo animate-logo">
-  <h1>Jouer un défi 🎮</h1>
+  <img src="assets/logo.png" class="logo pulse" alt="Logo">
+  <h1>Jouer un défi</h1>
 </header>
 
 <main>
-  <form id="playForm">
-    <label>Ton nom :</label>
-    <input type="text" name="playerName" required><br>
+<form id="playForm">
+  <label>Ton nom :</label><input type="text" name="playerName" required><br>
 
-    <label>Plat préféré de l'hôte :</label>
-    <input type="text" name="plat"><br>
+  <label>Plat préféré :</label><input type="text" name="plat"><br>
+  <label>Couleur préférée :</label><input type="text" name="couleur"><br>
+  <label>Film préféré :</label><input type="text" name="film"><br>
+  <label>Musique préférée :</label><input type="text" name="musique"><br>
+  <label>Sport préféré :</label><input type="text" name="sport"><br>
+  <label>Destination rêvée :</label><input type="text" name="voyage"><br>
+  <label>Animal préféré :</label><input type="text" name="animal"><br>
+  <label>Hobby préféré :</label><input type="text" name="hobby"><br>
+  <label>Super-héros préféré :</label><input type="text" name="hero"><br>
 
-    <label>Couleur préférée de l'hôte :</label>
-    <input type="text" name="couleur"><br>
-
-    <label>Film préféré de l'hôte :</label>
-    <input type="text" name="film"><br>
-
-    <label>Musique préférée de l'hôte :</label>
-    <input type="text" name="musique"><br>
-
-    <label>Sport préféré de l'hôte :</label>
-    <input type="text" name="sport"><br>
-
-    <label>Destination rêvée de l'hôte :</label>
-    <input type="text" name="voyage"><br>
-
-    <label>Animal préféré de l'hôte :</label>
-    <input type="text" name="animal"><br>
-
-    <label>Hobby préféré de l'hôte :</label>
-    <input type="text" name="hobby"><br>
-
-    <label>Super-héros préféré de l'hôte :</label>
-    <input type="text" name="hero"><br>
-
-    <button type="submit" class="btn pulse">Envoyer mes réponses</button>
-  </form>
+  <button type="submit" class="btn pulse">Envoyer mes réponses</button>
+</form>
 </main>
-
-<script>
-const form = document.getElementById("playForm");
-form.addEventListener("submit", function(e){
-  e.preventDefault();
-  alert("Merci ! Tes réponses ont été enregistrées ✅. Tu peux maintenant consulter ton score !");
-  window.location.href = "./resultat.html";
-});
-</script>
 </body>
 </html>
