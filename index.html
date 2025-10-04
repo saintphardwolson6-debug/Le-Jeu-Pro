@@ -3,102 +3,35 @@ html
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <title>Le Jeu Pro – Défi d’amitié</title>
+  <title>Accueil – Le Jeu Pro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to right, #fdfbfb, #ebedee);
-      margin: 0;
-      padding: 0;
-}
-
-.container {
-      max-width: 500px;
-      margin: 60px auto;
-      background: white;
-      padding: 40px;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      text-align: center;
-}
-
-    h1 {
-      font-size: 2em;
-      margin-bottom: 10px;
-}
-
-.steps {
-      text-align: left;
-      margin: 30px 0;
-      font-size: 1em;
-}
-
-.steps li {
-      margin-bottom: 12px;
-      padding-left: 10px;
-}
-
-    input {
-      width: 100%;
-      padding: 12px;
-      margin: 20px 0;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 1em;
-}
-
-    button {
-      padding: 12px 20px;
-      background: #4caf50;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 1em;
-      cursor: pointer;
-      transition: background 0.3s ease;
-}
-
-    button:hover {
-      background: #45a049;
-}
-
-    footer {
-      margin-top: 30px;
-      font-size: 0.9em;
-      color: #777;
-}
-  </style>
 </head>
 <body>
+  <!-- Meni navigasyon -->
+  <div id="menu"></div>
+
+  <!-- Kontni prensipal -->
   <div class="container">
-    <h1>🎯 Le Jeu Pro</h1>
-    <p>Un défi d’amitié amusant et interactif</p>
+    <h2>🎉 Bienvenue sur Le Jeu Pro</h2>
+    <p>Crée ton propre défi et découvre qui te connaît vraiment!</p>
 
-    <ul class="steps">
-      <li>1️⃣ <strong>Crée son défi</strong> → Elle entre son nom et répond à 10 questions sur elle-même.</li>
-      <li>2️⃣ <strong>Partage le lien</strong> → Elle envoie un lien personnalisé à ses amis.</li>
-      <li>3️⃣ <strong>Les amis jouent</strong> → Chacun essaie de deviner ses réponses.</li>
-      <li>4️⃣ <strong>Score</strong> → Le site calcule combien de bonnes réponses chaque ami a eues.</li>
-      <li>5️⃣ <strong>Classement</strong> → On voit qui connaît le mieux la personne.</li>
-    </ul>
+    <button onclick="window.location.href='questions.html'">🚀 Commencer le défi</button>
 
-    <input type="text" id="username" placeholder="👤 Ton prénom ou pseudo" />
-    <button onclick="startGame()">🚀 Commencer</button>
-
-    <footer>
-      <p>Développé avec ❤️ par <strong>Wolson</strong></p>
-    </footer>
+    <p style="margin-top: 20px;">Tu veux en savoir plus? <a href="apropos.html">📘 À propos du jeu</a></p>
   </div>
 
+  <!-- Footer -->
+  <div id="footer"></div>
+
+  <!-- Script pou chaje meni/footer -->
   <script>
-    function startGame() {
-      const name = document.getElementById("username").value.trim();
-      if (!name) return alert("Merci d’entrer ton prénom!");
-      localStorage.setItem("username", name);
-      window.location.href = "questions.html";
-}
+    fetch("menu.html").then(res => res.text()).then(data => {
+      document.getElementById("menu").innerHTML = data;
+});
+    fetch("footer.html").then(res => res.text()).then(data => {
+      document.getElementById("footer").innerHTML = data;
+});
   </script>
 </body>
 </html>
- ⁠
