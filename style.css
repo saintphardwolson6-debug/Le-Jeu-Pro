@@ -1,64 +1,103 @@
-
-⁠ css
-/* Style général */
-body {
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to right, #fdfbfb, #ebedee);
+css
+/* 🌐 Reset global */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-/* Conteneur central */
-.container {
-  max-width: 500px;
-  margin: 60px auto;
-  background: white;
-  padding: 40px;
-  border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-  text-align: center;
-}
-
-/* Titres */
-h1, h2 {
-  font-size: 2em;
-  margin-bottom: 20px;
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to right, #f0f4ff, #e0f7fa);
   color: #333;
+  line-height: 1.6;
+  padding-bottom: 100px;
 }
 
-/* Paragraphes */
-p {
-  font-size: 1em;
-  color: #555;
+/* 📦 Container */
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  animation: fadeIn 1.5s ease;
 }
 
-/* Champs de formulaire */
-input[type="text"] {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
+/* 🖼️ Imaj */
+img {
+  max-width: 100%;
+  height: auto;
   border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 1em;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-/* Boutons */
+/* 🎞️ Animasyon */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px);}
+  to   { opacity: 1; transform: translateY(0);}
+}
+
+@keyframes pulse {
+  0%   { transform: scale(1);}
+  50%  { transform: scale(1.05);}
+  100% { transform: scale(1);}
+}
+
+h2, h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  animation: pulse 2s infinite;
+}
+
+/* 🖱️ Bouton */
 button {
-  padding: 12px 20px;
-  background: #4caf50;
+  background-color: #00bfa5;
   color: white;
   border: none;
+  padding: 12px 20px;
   border-radius: 8px;
-  font-size: 1em;
   cursor: pointer;
-  transition: background 0.3s ease;
+  font-size: 16px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 button:hover {
-  background: #45a049;
+  transform: scale(1.05);
+  background-color: #008e76;
 }
 
-/* Tableau de classement */
+/* 🔇 Bouton mute */
+#muteBtn {
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 10px;
+}
+#muteBtn:hover {
+  background-color: #e0e0e0;
+}
+
+/* 📋 Formulaires */
+input[type="text"], input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="email"]:focus {
+  border-color: #00bfa5;
+  outline: none;
+}
+
+/* 📊 Tableau klasman */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -67,26 +106,81 @@ table {
 
 th, td {
   padding: 12px;
-  border-bottom: 1px solid #ddd;
   text-align: left;
+  border-bottom: 1px solid #ddd;
 }
 
 th {
-  background-color: #f2f2f2;
-  color: #333;
+  background-color: #00bfa5;
+  color: white;
 }
 
-tr:hover {
-  background-color: #f9f9f9;
-}
-
-/* Responsive */
+/* 📱 Responsive */
 @media (max-width: 600px) {
 .container {
-    padding: 20px;
+    padding: 10px;
 }
 
-  h1, h2 {
-    font-size: 1.5em;
+  button {
+    width: 100%;
 }
+
+.menu ul {
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu li {
+    margin: 10px 0;
+}
+}
+
+/* 🔗 Lyen */
+a {
+  color: #00bfa5;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* 🧭 Meni */
+.menu ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  background-color: #00bfa5;
+  padding: 10px;
+  border-radius: 0 0 12px 12px;
+}
+
+.menu li {
+  margin: 0 15px;
+}
+
+.menu a {
+  color: white;
+  font-weight: bold;
+}
+
+/* 🦶 Footer */
+.footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #f1f1f1;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 14px;
+}
+
+/* 🎧 Imaj ikon son */
+.audio-icon {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background: url('images/speaker.png') no-repeat center center;
+  background-size: contain;
+  cursor: pointer;
 }
