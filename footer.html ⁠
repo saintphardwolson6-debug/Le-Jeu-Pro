@@ -1,0 +1,7 @@
+html
+<footer>
+  <div class="footer-content">
+    <p>©️ 2025 Le Jeu Pro – Créé avec ❤️ pour tester l’amitié</p>
+    <p><a href="apropos.html">📘 À propos</a> | <a href="https://github.com/saintphardwolson6-debug/Le-Jeu-Pro" target="_blank">💻 Code source</a></p>
+  </div>
+</footer>
