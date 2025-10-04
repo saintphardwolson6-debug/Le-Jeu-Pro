@@ -1,11 +1,29 @@
- html
-<nav>
-  <ul class="nav-menu">
-    <li><a href="index.html">🏠 Accueil</a></li>
-    <li><a href="questions.html">🧩 Créer un défi</a></li>
-    <li><a href="jouer.html">🎯 Jouer</a></li>
-    <li><a href="score.html">🏆 Classement</a></li>
-    <li><a href="apropos.html">📘 À propos</a></li>
+html
+<!-- menu.html -->
+<nav class="menu">
+  <ul>
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="questions.html">Créer des questions</a></li>
+    <li><a href="jouer.html">Jouer</a></li>
+    <li><a href="score.html">Classement</a></li>
+    <li><a href="apropos.html">À propos</a></li>
+    <li><a href="contact.html">Contact</a></li>
   </ul>
+
+  <!-- 🎵 Audio de fond -->
+  <audio id="backgroundMusic" src="sounds/action-187118.mp3" autoplay loop></audio>
+  <button id="muteBtn">🔊 Couper le son</button>
 </nav>
+
+<script>
+  const music = document.getElementById("backgroundMusic");
+  const muteBtn = document.getElementById("muteBtn");
+
+  if (music && muteBtn) {
+    muteBtn.addEventListener("click", () => {
+      music.muted =!music.muted;
+      muteBtn.textContent = music.muted? "🔈 Activer le son": "🔊 Couper le son";
+});
+}
+</script>
  ⁠
