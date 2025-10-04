@@ -1,55 +1,35 @@
-html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <title>Ton lien de défi – Le Jeu Pro</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Résultat — Le Jeu Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- Meni navigasyon -->
-  <div id="menu"></div>
-
-  <!-- Kontni prensipal -->
-  <div class="container">
-    <h2>🔗 Ton lien est prêt!</h2>
-    <p>Voici ton lien personnalisé. Envoie-le à tes amis pour voir qui te connaît le mieux:</p>
-
-    <input type="text" id="shareLink" readonly />
-    <button onclick="copyLink()">📋 Copier le lien</button>
-
-    <p style="margin-top: 20px;">Quand tes amis auront joué, tu pourras voir leur score ici:</p>
-    <button onclick="window.location.href='score.html'">🏆 Voir le classement</button>
-  </div>
-
-  <!-- Footer -->
-  <div id="footer"></div>
-
-  <!-- Script pou chaje meni/footer + lyen pataje -->
+  <div id="menu-placeholder"></div>
+  <main class="container center">
+    <div class="card">
+      <h2>Résultat</h2>
+      <p id="resText" class="lead">Calcul du score...</p>
+      <div style="margin-top:12px">
+        <a id="backHome" class="btn" href="index.html">Accueil</a>
+        <a id="seeRank" class="btn ghost" href="#">Voir classement du défi</a>
+        <a class="btn" href="questions.html">Créer un défi</a>
+      </div>
+    </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="js/script.js"></script>
   <script>
-    // Chaje meni ak footer
-    fetch("menu.html").then(res => res.text()).then(data => {
-      document.getElementById("menu").innerHTML = data;
-});
-    fetch("footer.html").then(res => res.text()).then(data => {
-      document.getElementById("footer").innerHTML = data;
-});
-
-    // Kreye lyen pataje
-    const username = localStorage.getItem("username") || "ton-ami";
-    const link = `${window.location.origin}/jouer.html?user=${encodeURIComponent(username)}`;
-    document.getElementById("shareLink").value = link;
-    localStorage.setItem("shareLink", link);
-
-    // Fonksyon pou kopi lyen
-    function copyLink() {
-      const input = document.getElementById("shareLink");
-      input.select();
-      input.setSelectionRange(0, 99999); // pou mobil
-      document.execCommand("copy");
-      alert("Lien copié dans le presse-papiers!");
-}
+  function pageInitResult(){
+    const params = new URLSearchParams(location.search);
+    const uid = params.get('uid');
+    const name = params.get('name');
+    const score = params.get('score');
+    const resText = document.getElementById('resText');
+    resText.innerHTML = `${name} — Vous avez obtenu <strong>${score}</strong> / 10 points 🎉`;
+    if(uid) document.getElementById('seeRank').href = `score.html?uid=${uid}`;
+    else document.getElementById('seeRank').classList.add('hidden');
+  }
   </script>
 </body>
 </html>
