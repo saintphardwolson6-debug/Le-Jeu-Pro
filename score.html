@@ -1,59 +1,67 @@
- html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <title>Classement – Le Jeu Pro</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Classement — Le Jeu Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- Meni navigasyon -->
-  <div id="menu"></div>
+  <div id="menu-placeholder"></div>
+  <main class="container">
+    <div class="card">
+      <h2 id="title">Classement</h2>
 
-  <!-- Kontni prensipal -->
-  <div class="container">
-    <h2>🏆 Classement des joueurs</h2>
-    <p>Voici le score de tous ceux qui ont tenté de deviner tes réponses:</p>
+      <div id="hostSelector" class="form-row" style="margin-bottom:12px">
+        <input id="manualUid" placeholder="Entrer UID hôte pour voir participants (optionnel)">
+        <button id="loadUid" class="btn ghost">Charger</button>
+      </div>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Nom du joueur</th>
-          <th>Score</th>
-        </tr>
-      </thead>
-      <tbody id="scoreboardBody">
-        <!-- Rezilta yo ap parèt la -->
-      </tbody>
-    </table>
-
-    <button onclick="window.location.href='rejouer.html'">🔄 Créer un nouveau défi</button>
-  </div>
-
-  <!-- Footer -->
-  <div id="footer"></div>
-
-  <!-- Script pou chaje meni/footer + afiche klasman -->
+      <ol id="board"></ol>
+      <p id="empty" class="muted hidden">Aucun score pour le moment.</p>
+    </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="js/script.js"></script>
   <script>
-    // Chaje meni ak footer
-    fetch("menu.html").then(res => res.text()).then(data => {
-      document.getElementById("menu").innerHTML = data;
-});
-    fetch("footer.html").then(res => res.text()).then(data => {
-      document.getElementById("footer").innerHTML = data;
-});
+  function pageInitScore(){
+    const params = new URLSearchParams(location.search);
+    const uidParam = params.get('uid');
 
-    // Récupère klasman
-    const scoreboard = JSON.parse(localStorage.getItem("scoreboard") || "[]");
-    const sorted = scoreboard.sort((a, b) => b.score - a.score);
+    const title = document.getElementById('title');
+    const boardEl = document.getElementById('board');
+    const emptyEl = document.getElementById('empty');
 
-    const tbody = document.getElementById("scoreboardBody");
-    sorted.forEach(player => {
-      const row = document.createElement("tr");
-      row.innerHTML = `<td>${player.name}</td><td>${player.score}/10</td>`;
-      tbody.appendChild(row);
-});
+    const hosts = JSON.parse(localStorage.getItem('lejeu_hosts')||'{}');
+
+    function renderForUid(uid){
+      const host = hosts[uid];
+      title.textContent = host ? `Classement — ${host.hostName}` : `Classement — Défi ${uid}`;
+      const key = `lejeu_scores_${uid}`;
+      const board = JSON.parse(localStorage.getItem(key) || '[]');
+      if(board.length === 0){ emptyEl.classList.remove('hidden'); boardEl.innerHTML=''; return; }
+      emptyEl.classList.add('hidden');
+      boardEl.innerHTML = board.map((e,i) => `<li>${i+1}. ${e.name} — <strong>${e.score}</strong> <small>(${new Date(e.date).toLocaleString()})</small></li>`).join('');
+    }
+
+    function renderGlobal(){
+      title.textContent = 'Classement global (dernières parties)';
+      const global = JSON.parse(localStorage.getItem('lejeu_global') || '[]').slice(-200).reverse();
+      if(global.length === 0){ emptyEl.classList.remove('hidden'); boardEl.innerHTML=''; return; }
+      emptyEl.classList.add('hidden');
+      boardEl.innerHTML = global.map((e,i)=> `<li>${i+1}. ${e.name} — ${e.score} pts <small>(${e.hostName})</small></li>`).join('');
+    }
+
+    document.getElementById('loadUid').addEventListener('click', ()=>{
+      const uid = document.getElementById('manualUid').value.trim();
+      if(uid) renderForUid(uid);
+    });
+
+    if(uidParam) {
+      document.getElementById('manualUid').value = uidParam;
+      renderForUid(uidParam);
+    } else {
+      renderGlobal();
+    }
+  }
   </script>
 </body>
 </html>
