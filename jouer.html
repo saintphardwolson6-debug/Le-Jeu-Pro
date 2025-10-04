@@ -1,43 +1,61 @@
-html
+⁠ html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <title>Jouer au défi – Le Jeu Pro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Meni navigasyon -->
+  <div id="menu"></div>
+
+  <!-- Kontni prensipal -->
   <div class="container">
-    <h2>🎯 Connais-tu bien <span id="hostName"></span>?</h2>
-    <p>Entre ton prénom et essaie de deviner ses réponses:</p>
+    <h2>🎯 Devine les réponses de ton ami(e)</h2>
+    <p id="challengeTitle">Ce défi a été créé par...</p>
 
     <form id="playForm">
       <input type="text" id="playerName" placeholder="Ton prénom" required />
 
-      <input type="text" name="q1" placeholder="Son plat préféré?" required />
-      <input type="text" name="q2" placeholder="Sa couleur préférée?" required />
-      <input type="text" name="q3" placeholder="Son animal préféré?" required />
-      <input type="text" name="q4" placeholder="Son film préféré?" required />
-      <input type="text" name="q5" placeholder="Son sport préféré?" required />
-      <input type="text" name="q6" placeholder="Son artiste ou groupe préféré?" required />
-      <input type="text" name="q7" placeholder="Son pays de rêve?" required />
-      <input type="text" name="q8" placeholder="Son dessert préféré?" required />
-      <input type="text" name="q9" placeholder="Son passe-temps favori?" required />
-      <input type="text" name="q10" placeholder="Son plus grand rêve?" required />
+      <input type="text" name="q1" placeholder="Plat préféré?" required />
+      <input type="text" name="q2" placeholder="Couleur préférée?" required />
+      <input type="text" name="q3" placeholder="Animal préféré?" required />
+      <input type="text" name="q4" placeholder="Film préféré?" required />
+      <input type="text" name="q5" placeholder="Sport préféré?" required />
+      <input type="text" name="q6" placeholder="Artiste préféré?" required />
+      <input type="text" name="q7" placeholder="Pays de rêve?" required />
+      <input type="text" name="q8" placeholder="Dessert préféré?" required />
+      <input type="text" name="q9" placeholder="Passe-temps favori?" required />
+      <input type="text" name="q10" placeholder="Plus grand rêve?" required />
 
-      <button type="submit">📊 Voir mon score</button>
+      <button type="submit">✅ Soumettre mes réponses</button>
     </form>
   </div>
 
+  <!-- Footer -->
+  <div id="footer"></div>
+
+  <!-- Script pou chaje meni/footer + kalkile score -->
   <script>
-    // Récupère le nom de l'hôte depuis l'URL
-    const params = new URLSearchParams(window.location.search);
-    const host = params.get("user") || "ton ami";
-    document.getElementById("hostName").textContent = host;
+    // Chaje meni ak footer
+    fetch("menu.html").then(res => res.text()).then(data => {
+      document.getElementById("menu").innerHTML = data;
+});
+    fetch("footer.html").then(res => res.text()).then(data => {
+      document.getElementById("footer").innerHTML = data;
+});
 
-    // Récupère les vraies réponses
-    const correctAnswers = JSON.parse(localStorage.getItem("userAnswers") || "{}");
+    // Récupère nom hôte depuis URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const hostName = urlParams.get("user") || "ton ami";
+    document.getElementById("challengeTitle").textContent = `Ce défi a été créé par ${hostName}`;
 
+    // Récupère réponses hôte
+    const hostAnswers = JSON.parse(localStorage.getItem("userAnswers") || "{}");
+
+    // Soumèt repons zanmi
     document.getElementById("playForm").addEventListener("submit", function(e) {
       e.preventDefault();
       const formData = new FormData(this);
@@ -45,20 +63,18 @@ html
       let score = 0;
 
       formData.forEach((value, key) => {
-        const guess = value.trim().toLowerCase();
-        const correct = (correctAnswers[key] || "").trim().toLowerCase();
-        if (guess === correct) score++;
+        if (hostAnswers[key] && value.trim().toLowerCase() === hostAnswers[key].toLowerCase()) {
+          score++;
+}
 });
 
-      // Sauvegarde score et nom du joueur
+      // Sove score
       const scoreboard = JSON.parse(localStorage.getItem("scoreboard") || "[]");
       scoreboard.push({ name: playerName, score: score});
       localStorage.setItem("scoreboard", JSON.stringify(scoreboard));
 
-      // Redirection vers la page de score
       window.location.href = "score.html";
 });
   </script>
 </body>
 </html>
- ⁠
