@@ -1,13 +1,10 @@
-html
-<nav class="menu">
-  <ul>
+<nav class="nav">
+  <a href="index.html" class="nav-brand"><img src="assets/images/logo-jeu-pro.png" alt="logo" /></a>
+  <ul class="nav-links">
     <li><a href="index.html">Accueil</a></li>
+    <li><a href="questions.html">Hôte</a></li>
     <li><a href="jouer.html">Jouer</a></li>
-    <li><a href="score.html">Classement</a></li>
+    <li><a href="score.html">Classements</a></li>
     <li><a href="apropos.html">À propos</a></li>
-    <li><a href="contact.html">Contact</a></li>
   </ul>
-
-  <audio id="backgroundMusic" src="sounds/action-187118.mp3" autoplay loop></audio>
-  <button id="muteBtn">🔊 Couper le son</button>
 </nav>
