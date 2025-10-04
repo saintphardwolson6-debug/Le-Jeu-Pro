@@ -1,149 +1,60 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
-<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Le Jeu Pro — Jouer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jouer - Le Jeu Pro</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="menu-placeholder"></div>
+<header>
+  <img src="assets/logo.png" alt="Logo" class="logo animate-logo">
+  <h1>Jouer un défi 🎮</h1>
+</header>
 
-  <main class="container">
-    <div id="gameCard" class="card">
-      <h2 id="hostTitle">Prêt à jouer ?</h2>
-      <p id="hostInfo" class="muted">Entrez un lien ou un UID pour rejoindre un défi.</p>
+<main>
+  <form id="playForm">
+    <label>Ton nom :</label>
+    <input type="text" name="playerName" required><br>
 
-      <div id="enterArea">
-        <label>Votre pseudo</label>
-        <input id="playerName" placeholder="Ex: Alex" required>
-        <label>Entrer le lien ou UID du défi</label>
-        <input id="hostIdInput" placeholder="Coller le lien ou UID ici">
-        <div class="form-row">
-          <button id="startBtn" class="btn">Commencer</button>
-          <button id="pasteBtn" class="btn ghost">Coller depuis presse-papiers</button>
-        </div>
-      </div>
+    <label>Plat préféré de l'hôte :</label>
+    <input type="text" name="plat"><br>
 
-      <form id="playForm" class="hidden">
-        <div id="playQuestions"></div>
-        <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:12px">
-          <button type="submit" class="btn">Soumettre mes réponses</button>
-        </div>
-      </form>
-    </div>
-  </main>
+    <label>Couleur préférée de l'hôte :</label>
+    <input type="text" name="couleur"><br>
 
-  <div id="footer-placeholder"></div>
-  <script src="js/script.js"></script>
-  <script>
-  function pageInitPlay(){
-    const params = new URLSearchParams(location.search);
-    const preUid = params.get('uid') || '';
-    const hosts = JSON.parse(localStorage.getItem('lejeu_hosts')||'{}');
+    <label>Film préféré de l'hôte :</label>
+    <input type="text" name="film"><br>
 
-    const playerNameInput = document.getElementById('playerName');
-    const hostIdInput = document.getElementById('hostIdInput');
-    if(preUid) hostIdInput.value = preUid;
+    <label>Musique préférée de l'hôte :</label>
+    <input type="text" name="musique"><br>
 
-    document.getElementById('pasteBtn').addEventListener('click', async ()=>{
-      try {
-        const text = await navigator.clipboard.readText();
-        const m = text.match(/uid=([A-Za-z0-9_.-]+)/) || text.match(/([A-Za-z0-9_.-]{6,})/);
-        if(m) hostIdInput.value = m[1];
-        else alert('Aucun UID trouvé dans le presse-papiers.');
-      } catch(e){ alert('Impossible d\'accéder au presse-papiers'); }
-    });
+    <label>Sport préféré de l'hôte :</label>
+    <input type="text" name="sport"><br>
 
-    document.getElementById('startBtn').addEventListener('click', ()=>{
-      const playerName = playerNameInput.value.trim();
-      const uidRaw = hostIdInput.value.trim();
-      if(!playerName){ alert('Entrez votre pseudo.'); return; }
-      if(!uidRaw){ alert('Entrez le lien ou UID du défi.'); return; }
+    <label>Destination rêvée de l'hôte :</label>
+    <input type="text" name="voyage"><br>
 
-      // extract uid if full link pasted
-      const match = uidRaw.match(/uid=([A-Za-z0-9_.-]+)/);
-      const uid = match ? match[1] : uidRaw;
-      const host = hosts[uid];
-      if(!host){ alert('Défi introuvable. Vérifiez le lien/UID.'); return; }
+    <label>Animal préféré de l'hôte :</label>
+    <input type="text" name="animal"><br>
 
-      // show questions
-      document.getElementById('hostTitle').textContent = `Défi de ${host.hostName} — Devinez ses réponses`;
-      document.getElementById('hostInfo').textContent = `10 questions — chaque bonne réponse = 1 point (max 10).`;
-      document.getElementById('enterArea').classList.add('hidden');
-      const playForm = document.getElementById('playForm');
-      const playQuestions = document.getElementById('playQuestions');
-      playQuestions.innerHTML = '';
-      host.answers.forEach((q, idx)=>{
-        const div = document.createElement('div');
-        div.className = 'q-row';
-        div.innerHTML = `
-          <label>Q${idx+1}</label>
-          <input type="text" name="a${idx}" placeholder="Votre réponse (devinez)">
-        `;
-        playQuestions.appendChild(div);
-      });
-      playForm.classList.remove('hidden');
-      playForm.dataset.uid = uid;
-      playForm.dataset.playerName = playerName;
-      playForm.dataset.hostName = host.hostName;
-      playForm.dataset.answers = JSON.stringify(host.answers);
-      playForm.scrollIntoView({behavior:'smooth'});
-      playForm.querySelector('input')?.focus();
-      playS('click');
-    });
+    <label>Hobby préféré de l'hôte :</label>
+    <input type="text" name="hobby"><br>
 
-    document.getElementById('playForm').addEventListener('submit', e=>{
-      e.preventDefault();
-      const form = e.target;
-      const uid = form.dataset.uid;
-      const playerName = form.dataset.playerName;
-      const hostName = form.dataset.hostName;
-      const hostAnswers = JSON.parse(form.dataset.answers);
+    <label>Super-héros préféré de l'hôte :</label>
+    <input type="text" name="hero"><br>
 
-      if(!uid || !hostAnswers) { alert('Erreur interne.'); return; }
+    <button type="submit" class="btn pulse">Envoyer mes réponses</button>
+  </form>
+</main>
 
-      const fdata = new FormData(form);
-      const guesses = [];
-      for(let i=0;i<hostAnswers.length;i++) guesses.push((fdata.get('a'+i) || '').trim());
-
-      const score = calculateScore(hostAnswers, guesses);
-
-      // save participant score under host UID
-      const key = `lejeu_scores_${uid}`;
-      const board = JSON.parse(localStorage.getItem(key) || '[]');
-      const entry = { name: playerName, score, date: new Date().toISOString() };
-      board.push(entry);
-      board.sort((a,b)=> b.score - a.score || new Date(a.date) - new Date(b.date));
-      localStorage.setItem(key, JSON.stringify(board.slice(0,200)));
-
-      // global store
-      const global = JSON.parse(localStorage.getItem('lejeu_global') || '[]');
-      global.push({ hostId: uid, hostName, name: playerName, score, date: new Date().toISOString() });
-      localStorage.setItem('lejeu_global', JSON.stringify(global.slice(-1000)));
-
-      // redirect to resultat
-      const paramsOut = new URLSearchParams({ uid, name: playerName, score });
-      location.href = `resultat.html?${paramsOut.toString()}`;
-    });
-
-    // scoring helper (case-insensitive + inclusion + shared token)
-    function calculateScore(hostAnswers, guesses){
-      let s = 0;
-      for(let i=0;i<hostAnswers.length;i++){
-        const h = (hostAnswers[i]||'').toLowerCase().trim();
-        const g = (guesses[i]||'').toLowerCase().trim();
-        if(!h) continue; // if host left question blank => not scored
-        if(!g) continue;
-        if(h === g) { s++; continue; }
-        if(h.includes(g) || g.includes(h)) { s++; continue; }
-        // token check
-        const hs = h.split(/\s+/).filter(Boolean);
-        const gs = g.split(/\s+/).filter(Boolean);
-        const common = hs.filter(x => gs.includes(x));
-        if(common.length >= 1) { s++; continue; }
-      }
-      return s;
-    }
-  }
-  </script>
+<script>
+const form = document.getElementById("playForm");
+form.addEventListener("submit", function(e){
+  e.preventDefault();
+  alert("Merci ! Tes réponses ont été enregistrées ✅. Tu peux maintenant consulter ton score !");
+  window.location.href = "./resultat.html";
+});
+</script>
 </body>
 </html>
