@@ -1,10 +1,21 @@
-// Gestion musique
-const music = document.getElementById("backgroundMusic");
+// Music mute
+const music = document.getElementById("music");
 const muteBtn = document.getElementById("muteBtn");
+if(music && muteBtn){muteBtn.addEventListener("click",()=>{music.muted=!music.muted;muteBtn.textContent=music.muted?"🔈 Activer":"🔊 Couper";});}
 
-if (music && muteBtn) {
-  muteBtn.addEventListener("click", () => {
-    music.muted = !music.muted;
-    muteBtn.textContent = music.muted ? "🔈 Activer le son" : "🔊 Couper le son";
-  });
+// Copy link
+function copyLink(){
+  const input=document.getElementById("hostLink")||document.getElementById("uidLink");
+  input.select();document.execCommand("copy");alert("Lien copié ✅");
 }
+
+// Share dynamique
+window.addEventListener("load",()=>{
+  const uidInput=document.getElementById("uidLink");
+  if(uidInput){
+    const link=uidInput.value;
+    document.getElementById("shareWA").href="https://wa.me/?text=Viens%20jouer%20au%20Jeu%20Pro%20👉%20"+encodeURIComponent(link);
+    document.getElementById("shareFB").href="https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(link);
+    document.getElementById("shareTW").href="https://twitter.com/intent/tweet?url="+encodeURIComponent(link)+"&text=Viens%20jouer%20au%20Jeu%20Pro!";
+  }
+});
