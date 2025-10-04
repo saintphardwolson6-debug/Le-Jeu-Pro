@@ -1,0 +1,92 @@
+
+⁠ css
+/* Style général */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to right, #fdfbfb, #ebedee);
+  margin: 0;
+  padding: 0;
+}
+
+/* Conteneur central */
+.container {
+  max-width: 500px;
+  margin: 60px auto;
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+/* Titres */
+h1, h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Paragraphes */
+p {
+  font-size: 1em;
+  color: #555;
+}
+
+/* Champs de formulaire */
+input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1em;
+}
+
+/* Boutons */
+button {
+  padding: 12px 20px;
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #45a049;
+}
+
+/* Tableau de classement */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+.container {
+    padding: 20px;
+}
+
+  h1, h2 {
+    font-size: 1.5em;
+}
+}
