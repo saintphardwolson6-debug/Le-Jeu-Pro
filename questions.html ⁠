@@ -3,32 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Le Jeu Pro</title>
+<title>Jouer - Le Jeu Pro</title>
 <link rel="stylesheet" href="css/style.css">
 <script src="js/script.js" defer></script>
 </head>
 <body>
 <header>
   <img src="assets/logo.png" class="logo pulse" alt="Logo">
-  <h1>Bienvenue sur Le Jeu Pro 🎮</h1>
+  <h1>Jouer un défi</h1>
 </header>
 
 <main>
-  <p>Testez combien vos amis vous connaissent !</p>
-  <a href="questions.html" class="btn pulse">🎮 Créer mon défi</a>
-  <a href="jouer.html" class="btn pulse">▶️ Jouer un défi</a>
+<form id="playForm">
+  <label>Ton nom :</label><input type="text" name="playerName" required><br>
+
+  <label>Plat préféré :</label><input type="text" name="plat"><br>
+  <label>Couleur préférée :</label><input type="text" name="couleur"><br>
+  <label>Film préféré :</label><input type="text" name="film"><br>
+  <label>Musique préférée :</label><input type="text" name="musique"><br>
+  <label>Sport préféré :</label><input type="text" name="sport"><br>
+  <label>Destination rêvée :</label><input type="text" name="voyage"><br>
+  <label>Animal préféré :</label><input type="text" name="animal"><br>
+  <label>Hobby préféré :</label><input type="text" name="hobby"><br>
+  <label>Super-héros préféré :</label><input type="text" name="hero"><br>
+
+  <button type="submit" class="btn pulse">Envoyer mes réponses</button>
+</form>
 </main>
-
-<footer>
-  <p>Partager :</p>
-  <div class="social-share">
-    <a id="shareWA" target="_blank"><i class="fab fa-whatsapp"></i></a>
-    <a id="shareFB" target="_blank"><i class="fab fa-facebook"></i></a>
-    <a id="shareTW" target="_blank"><i class="fab fa-twitter"></i></a>
-  </div>
-</footer>
-
-<audio id="music" src="assets/action.mp3" autoplay loop></audio>
-<button id="muteBtn">🔊 Couper le son</button>
 </body>
 </html>
