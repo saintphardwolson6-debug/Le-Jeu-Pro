@@ -1,116 +1,79 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Le Jeu Pro — Créer un défi</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Créer mon défi - Le Jeu Pro</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <div id="menu-placeholder"></div>
-  <main class="container">
-    <div class="card">
-      <h2>Créer votre défi (Hôte)</h2>
-      <form id="hostForm">
-        <label>Votre pseudo (hôte)</label>
-        <input type="text" id="hostName" placeholder="Ex: Tchoulo" required>
+<header>
+  <img src="assets/logo.png" alt="Logo Le Jeu Pro" class="logo animate-logo">
+  <h1>Créer ton défi 🎯</h1>
+</header>
 
-        <p class="muted">Répondez aux 10 questions (ou laissez vide si vous ne voulez pas). Maximum 10.</p>
+<main>
+  <form id="hostForm">
+    <label>Nom de l'hôte :</label>
+    <input type="text" name="hostName" required><br>
 
-        <div id="questionsList"></div>
+    <label>Plat préféré :</label>
+    <input type="text" name="plat"><br>
 
-        <div class="form-row">
-          <button type="submit" class="btn">Générer mon lien</button>
-          <button type="button" id="clearBtn" class="btn ghost">Réinitialiser</button>
-        </div>
-      </form>
+    <label>Couleur préférée :</label>
+    <input type="text" name="couleur"><br>
 
-      <div id="shareArea" class="hidden card small">
-        <p><strong>Lien du défi généré :</strong></p>
-        <input id="shareLink" readonly />
-        <div style="margin-top:10px; display:flex; gap:8px;">
-          <button id="copyBtn" class="btn">Copier le lien</button>
-          <button id="openBtn" class="btn ghost">Ouvrir le lien</button>
-          <button id="inspectBtn" class="btn" title="Voir les participants">Voir participants</button>
-        </div>
-        <p class="muted small">Le lien contient un UID unique lié à votre pseudo.</p>
-      </div>
-    </div>
+    <label>Film préféré :</label>
+    <input type="text" name="film"><br>
 
-    <div class="card small muted" style="margin-top:14px">
-      <strong>Astuce :</strong> partagez le lien sur WhatsApp / Messenger / TikTok DM.
-    </div>
-  </main>
+    <label>Musique préférée :</label>
+    <input type="text" name="musique"><br>
 
-  <div id="footer-placeholder"></div>
-  <script src="js/script.js"></script>
-  <script>
-  function pageInitHost(){
-    // Génération des 10 questions (par défaut) - hôte peut répondre librement
-    const defaultQs = [
-      "Quel est ton plat préféré ?",
-      "Quelle est ta couleur préférée ?",
-      "Quel est ton sport préféré ?",
-      "Quelle est ta boisson préférée ?",
-      "Quel est ton animal préféré ?",
-      "Quelle est ta saison préférée ?",
-      "Quel est ton film préféré ?",
-      "Quel est ton artiste préféré ?",
-      "Quel est ton jeu vidéo préféré ?",
-      "Quelle est ta destination de rêve ?"
-    ];
+    <label>Sport préféré :</label>
+    <input type="text" name="sport"><br>
 
-    const qContainer = document.getElementById('questionsList');
-    for(let i=0;i<10;i++){
-      const div = document.createElement('div');
-      div.className = 'q-row';
-      div.innerHTML = `
-        <label>Q${i+1} — ${defaultQs[i]}</label>
-        <input type="text" class="hostAnswer" data-q="${i}" placeholder="Réponse de l'hôte (ex: Pizza)">
-      `;
-      qContainer.appendChild(div);
-    }
+    <label>Destination rêvée :</label>
+    <input type="text" name="voyage"><br>
 
-    document.getElementById('hostForm').addEventListener('submit', e=>{
-      e.preventDefault();
-      const hostNameRaw = document.getElementById('hostName').value.trim();
-      const hostName = hostNameRaw || 'Hôte';
-      const answers = Array.from(document.querySelectorAll('.hostAnswer')).map(i => i.value.trim());
-      // UID: hostname + timestamp + random
-      const uid = `${sanitize(hostName)}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2,8)}`;
-      // save host object
-      const hosts = JSON.parse(localStorage.getItem('lejeu_hosts')||'{}');
-      hosts[uid] = { hostName, answers, created: new Date().toISOString() };
-      localStorage.setItem('lejeu_hosts', JSON.stringify(hosts));
+    <label>Animal préféré :</label>
+    <input type="text" name="animal"><br>
 
-      // share link
-      const origin = location.origin;
-      const path = location.pathname.replace(/\/[^/]*$/, '/'); // base path
-      const link = `${origin}${path}jouer.html?uid=${uid}`;
-      document.getElementById('shareLink').value = link;
-      document.getElementById('shareArea').classList.remove('hidden');
+    <label>Hobby préféré :</label>
+    <input type="text" name="hobby"><br>
 
-      document.getElementById('openBtn').onclick = ()=> location.href = `jouer.html?uid=${uid}`;
-      document.getElementById('copyBtn').onclick = ()=> {
-        navigator.clipboard?.writeText(link);
-        playS('click');
-        alert('Lien copié !');
-      };
-      document.getElementById('inspectBtn').onclick = ()=> location.href = `score.html?uid=${uid}`;
-      playS('click');
-    });
+    <label>Super-héros préféré :</label>
+    <input type="text" name="hero"><br>
 
-    document.getElementById('clearBtn').addEventListener('click', ()=>{
-      document.getElementById('hostName').value = '';
-      document.querySelectorAll('.hostAnswer').forEach(i=> i.value = '');
-      document.getElementById('shareArea').classList.add('hidden');
-      playS('click');
-    });
+    <button type="submit" class="btn pulse">Générer mon lien</button>
+  </form>
 
-    function sanitize(s){
-      return s.replace(/[^A-Za-z0-9_-]/g,'').slice(0,24) || 'host';
-    }
-  }
-  </script>
+  <div id="generatedLink" style="display:none;">
+    <p>Lien à partager avec vos amis :</p>
+    <input type="text" id="hostLink" readonly>
+    <button onclick="copyLink()">📋 Copier le lien</button>
+  </div>
+</main>
+
+<script>
+const form = document.getElementById("hostForm");
+form.addEventListener("submit", function(e){
+  e.preventDefault();
+  const hostName = form.hostName.value.trim() || "host";
+  // Générer lien unique UID
+  const uid = hostName + Math.floor(Math.random()*10000);
+  const link = window.location.origin + "/jouer.html?uid=" + uid;
+  document.getElementById("hostLink").value = link;
+  document.getElementById("generatedLink").style.display = "block";
+  alert("Lien généré ✅ Partage-le avec tes amis !");
+});
+
+function copyLink() {
+  const input = document.getElementById("hostLink");
+  input.select();
+  document.execCommand("copy");
+  alert("Lien copié ✅ Partage-le !");
+}
+</script>
 </body>
 </html>
