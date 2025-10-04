@@ -1,0 +1,35 @@
+html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Créer ton propre défi – Le Jeu Pro</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>🔁 À ton tour de briller!</h2>
+    <p>Tu veux savoir qui te connaît vraiment? Crée ton propre défi maintenant:</p>
+
+    <input type="text" id="newUsername" placeholder="Ton prénom ou pseudo" />
+    <button onclick="startNewGame()">🚀 Créer mon défi</button>
+
+    <p style="margin-top: 30px;">Tu seras redirigé vers les 10 questions pour personnaliser ton défi.</p>
+  </div>
+
+  <script>
+    function startNewGame() {
+      const name = document.getElementById("newUsername").value.trim();
+      if (!name) {
+        alert("Merci d’entrer ton prénom!");
+        return;
+}
+      localStorage.setItem("username", name);
+      localStorage.removeItem("userAnswers");
+      localStorage.removeItem("shareLink");
+      localStorage.removeItem("scoreboard");
+      window.location.href = "questions.html";
+}
+  </script>
+</body>
+</html>
