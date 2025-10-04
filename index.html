@@ -2,36 +2,23 @@ html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <title>Accueil – Le Jeu Pro</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Accueil - Le Jeu Pro</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- Meni navigasyon -->
+  <div id="loader" class="loader-container"><div class="loader"></div></div>
   <div id="menu"></div>
 
-  <!-- Kontni prensipal -->
-  <div class="container">
-    <h2>🎉 Bienvenue sur Le Jeu Pro</h2>
-    <p>Crée ton propre défi et découvre qui te connaît vraiment!</p>
+  <main>
+    <h1 class="pulse">Bienvenue sur Le Jeu Pro</h1>
+    <p class="fade-in">Crée ton propre défi et découvre qui te connaît vraiment!</p>
+    <a href="jouer.html" class="slide-in">C’est ton tour!</a>
+    <a href="apropos.html" class="slide-in">À propos du jeu</a>
+  </main>
 
-    <button onclick="window.location.href='questions.html'">🚀 Commencer le défi</button>
-
-    <p style="margin-top: 20px;">Tu veux en savoir plus? <a href="apropos.html">📘 À propos du jeu</a></p>
-  </div>
-
-  <!-- Footer -->
   <div id="footer"></div>
-
-  <!-- Script pou chaje meni/footer -->
-  <script>
-    fetch("menu.html").then(res => res.text()).then(data => {
-      document.getElementById("menu").innerHTML = data;
-});
-    fetch("footer.html").then(res => res.text()).then(data => {
-      document.getElementById("footer").innerHTML = data;
-});
-  </script>
+  <script src="js/script.js"></script>
 </body>
 </html>
+ ⁠
