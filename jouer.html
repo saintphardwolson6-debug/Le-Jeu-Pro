@@ -1,80 +1,27 @@
-⁠ html
+html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <title>Jouer au défi – Le Jeu Pro</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Jouer - Le Jeu Pro</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- Meni navigasyon -->
+  <div id="loader" class="loader-container"><div class="loader"></div></div>
   <div id="menu"></div>
 
-  <!-- Kontni prensipal -->
-  <div class="container">
-    <h2>🎯 Devine les réponses de ton ami(e)</h2>
-    <p id="challengeTitle">Ce défi a été créé par...</p>
+  <main>
+    <h2 class="pulse">Réponds aux questions</h2>
+    <div class="fade-in">
+      <p>Quel est le plus grand océan du monde?</p>
+      <button class="slide-in">Atlantique</button>
+      <button class="slide-in">Pacifique</button>
+      <button class="slide-in">Indien</button>
+    </div>
+  </main>
 
-    <form id="playForm">
-      <input type="text" id="playerName" placeholder="Ton prénom" required />
-
-      <input type="text" name="q1" placeholder="Plat préféré?" required />
-      <input type="text" name="q2" placeholder="Couleur préférée?" required />
-      <input type="text" name="q3" placeholder="Animal préféré?" required />
-      <input type="text" name="q4" placeholder="Film préféré?" required />
-      <input type="text" name="q5" placeholder="Sport préféré?" required />
-      <input type="text" name="q6" placeholder="Artiste préféré?" required />
-      <input type="text" name="q7" placeholder="Pays de rêve?" required />
-      <input type="text" name="q8" placeholder="Dessert préféré?" required />
-      <input type="text" name="q9" placeholder="Passe-temps favori?" required />
-      <input type="text" name="q10" placeholder="Plus grand rêve?" required />
-
-      <button type="submit">✅ Soumettre mes réponses</button>
-    </form>
-  </div>
-
-  <!-- Footer -->
   <div id="footer"></div>
-
-  <!-- Script pou chaje meni/footer + kalkile score -->
-  <script>
-    // Chaje meni ak footer
-    fetch("menu.html").then(res => res.text()).then(data => {
-      document.getElementById("menu").innerHTML = data;
-});
-    fetch("footer.html").then(res => res.text()).then(data => {
-      document.getElementById("footer").innerHTML = data;
-});
-
-    // Récupère nom hôte depuis URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const hostName = urlParams.get("user") || "ton ami";
-    document.getElementById("challengeTitle").textContent = `Ce défi a été créé par ${hostName}`;
-
-    // Récupère réponses hôte
-    const hostAnswers = JSON.parse(localStorage.getItem("userAnswers") || "{}");
-
-    // Soumèt repons zanmi
-    document.getElementById("playForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const formData = new FormData(this);
-      const playerName = document.getElementById("playerName").value.trim();
-      let score = 0;
-
-      formData.forEach((value, key) => {
-        if (hostAnswers[key] && value.trim().toLowerCase() === hostAnswers[key].toLowerCase()) {
-          score++;
-}
-});
-
-      // Sove score
-      const scoreboard = JSON.parse(localStorage.getItem("scoreboard") || "[]");
-      scoreboard.push({ name: playerName, score: score});
-      localStorage.setItem("scoreboard", JSON.stringify(scoreboard));
-
-      window.location.href = "score.html";
-});
-  </script>
+  <script src="js/script.js"></script>
 </body>
 </html>
+ ⁠
