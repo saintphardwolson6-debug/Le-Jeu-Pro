@@ -1,67 +1,32 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
-<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Classement — Le Jeu Pro</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Classement - Le Jeu Pro</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="menu-placeholder"></div>
-  <main class="container">
-    <div class="card">
-      <h2 id="title">Classement</h2>
+<header>
+  <img src="assets/logo.png" alt="Logo" class="logo animate-logo">
+  <h1>🏆 Classement des joueurs</h1>
+</header>
 
-      <div id="hostSelector" class="form-row" style="margin-bottom:12px">
-        <input id="manualUid" placeholder="Entrer UID hôte pour voir participants (optionnel)">
-        <button id="loadUid" class="btn ghost">Charger</button>
-      </div>
-
-      <ol id="board"></ol>
-      <p id="empty" class="muted hidden">Aucun score pour le moment.</p>
-    </div>
-  </main>
-  <div id="footer-placeholder"></div>
-  <script src="js/script.js"></script>
-  <script>
-  function pageInitScore(){
-    const params = new URLSearchParams(location.search);
-    const uidParam = params.get('uid');
-
-    const title = document.getElementById('title');
-    const boardEl = document.getElementById('board');
-    const emptyEl = document.getElementById('empty');
-
-    const hosts = JSON.parse(localStorage.getItem('lejeu_hosts')||'{}');
-
-    function renderForUid(uid){
-      const host = hosts[uid];
-      title.textContent = host ? `Classement — ${host.hostName}` : `Classement — Défi ${uid}`;
-      const key = `lejeu_scores_${uid}`;
-      const board = JSON.parse(localStorage.getItem(key) || '[]');
-      if(board.length === 0){ emptyEl.classList.remove('hidden'); boardEl.innerHTML=''; return; }
-      emptyEl.classList.add('hidden');
-      boardEl.innerHTML = board.map((e,i) => `<li>${i+1}. ${e.name} — <strong>${e.score}</strong> <small>(${new Date(e.date).toLocaleString()})</small></li>`).join('');
-    }
-
-    function renderGlobal(){
-      title.textContent = 'Classement global (dernières parties)';
-      const global = JSON.parse(localStorage.getItem('lejeu_global') || '[]').slice(-200).reverse();
-      if(global.length === 0){ emptyEl.classList.remove('hidden'); boardEl.innerHTML=''; return; }
-      emptyEl.classList.add('hidden');
-      boardEl.innerHTML = global.map((e,i)=> `<li>${i+1}. ${e.name} — ${e.score} pts <small>(${e.hostName})</small></li>`).join('');
-    }
-
-    document.getElementById('loadUid').addEventListener('click', ()=>{
-      const uid = document.getElementById('manualUid').value.trim();
-      if(uid) renderForUid(uid);
-    });
-
-    if(uidParam) {
-      document.getElementById('manualUid').value = uidParam;
-      renderForUid(uidParam);
-    } else {
-      renderGlobal();
-    }
-  }
-  </script>
+<main>
+<table>
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Score</th>
+    </tr>
+  </thead>
+  <tbody id="scoreTable">
+    <tr><td>Amélie</td><td>8/10</td></tr>
+    <tr><td>Louis</td><td>6/10</td></tr>
+    <tr><td>Emma</td><td>5/10</td></tr>
+  </tbody>
+</table>
+<a href="./index.html" class="btn pulse">🏠 Retour à l'accueil</a>
+</main>
 </body>
 </html>
